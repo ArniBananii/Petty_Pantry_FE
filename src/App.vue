@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LoginForm from "./components/LoginForm.vue";
+import UserPantry from "@/components/UserPantry.vue";
 </script>
 
 <template>
@@ -7,7 +8,7 @@ import LoginForm from "./components/LoginForm.vue";
     <h1>Landing Login page</h1>
 
     <div>
-      <LoginForm />
+      <UserPantry />
     </div>
   </header>
 </template>
