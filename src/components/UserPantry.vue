@@ -1,5 +1,5 @@
 <template>
-  <h1>Your Pantry</h1>
+  <h1>Dein Pantry</h1>
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
@@ -24,7 +24,8 @@
 import {onMounted, ref} from "vue";
 
 const ingredients = ref([]);
-const url = 'http://localhost:8080/api/v1/unqingredients';
+const userID = '9';
+const url = 'http://localhost:8080/api/v1/unqingredients/user/'.concat(userID);
 const loading = ref(false);
 const error = ref(null);
 
