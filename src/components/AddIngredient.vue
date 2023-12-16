@@ -10,13 +10,13 @@
 
 import {onMounted, ref} from "vue";
 import useFetch from "@/service/useFetch";
+import {INGREDIENTS_ENDPOINT} from "@/constants";
 
-const getUrl = 'http://localhost:8080/api/v1/ingredients';
 const postUrl = 'http://localhost:8080/api/v1/unqingredient';
 const ingredients = ref([]);
 
 const fetch = async () => {
-  const data = await useFetch(getUrl, 'GET');
+  const data = await useFetch(INGREDIENTS_ENDPOINT, 'GET');
   ingredients.value = data;
 }
 
