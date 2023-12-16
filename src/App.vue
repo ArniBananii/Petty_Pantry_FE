@@ -9,7 +9,7 @@ import AddIngredient from "@/components/AddIngredient.vue";
     <h1>Landing Login page</h1>
 
     <div>
-      <UserPantry />
+      <AddIngredient />
     </div>
   </header>
 </template>
