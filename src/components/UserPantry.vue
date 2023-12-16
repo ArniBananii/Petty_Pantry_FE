@@ -1,9 +1,6 @@
 <template>
   <h1>Dein Pantry</h1>
   <div>
-    <div v-if="loading">Loading...</div>
-    <div v-else>
-      <div v-if="error">Error: {{error}}</div>
       <table>
         <tr>
           <th>Zutat</th>
@@ -16,32 +13,22 @@
           <td>{{ing.expirationDate}}</td>
         </tr>
       </table>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onBeforeMount, ref} from "vue";
+import useFetch from "@/service/useFetch";
+import {UNQINGREDIENT_ENDPOINT} from "@/constants";
 
 const ingredients = ref([]);
 const userID = '9';
-const url = 'http://localhost:8080/api/v1/unqingredients/user/'.concat(userID);
-const loading = ref(false);
-const error = ref(null);
 
-const fetchData = async () => {
-  loading.value = true;
-  try {
-    const response = await fetch(url);
-    ingredients.value = await response.json();
-  } catch (e: any) {
-    error.value = e;
-  } finally {
-    loading.value = false;
-  }
+const fetch = async () => {
+  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(userID), 'GET');
+  ingredients.value = data;
 };
-
-onMounted(fetchData)
+onBeforeMount(fetch);
 </script>
 
 <style scoped>
