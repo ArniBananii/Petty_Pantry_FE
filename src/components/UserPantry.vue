@@ -33,9 +33,8 @@ const fetch = async () => {
   ingredients.value = data;
 };
 
-const deleteIng = async (ingredientID: number) => {
-  await useFetch(DELETE_UNQING_ENDPOINT.concat(ingredientID.toString()), 'DELETE');
-  fetch();
+const deleteIng = async (ungIngID: number) => {
+  await useFetch(DELETE_UNQING_ENDPOINT.concat(ungIngID.toString()), 'DELETE');
 }
 
 onBeforeMount(fetch);
