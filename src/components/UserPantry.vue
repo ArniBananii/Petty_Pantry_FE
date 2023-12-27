@@ -1,45 +1,46 @@
 <template>
   <h1>Dein Pantry</h1>
   <div>
-      <table>
-        <tr>
-          <th>Zutat</th>
-          <th>Pantry</th>
-          <th>Ablaufdatum</th>
-          <th>Aktionen</th>
-        </tr>
-        <tr v-for="ing in ingredients" :key="ing.uniqueIngredientID">
-          <td>{{ing.ingredientID}}</td>
-          <td>{{ing.pantryID}}</td>
-          <td>{{ing.expirationDate}}</td>
-          <td>
-            <button @click="deleteIng(ing.uniqueIngredientID)">Löschen</button>
-          </td>
-        </tr>
-      </table>
+    <table>
+      <tr>
+        <th>Zutat</th>
+        <th>Pantry</th>
+        <th>Ablaufdatum</th>
+        <th>Aktionen</th>
+      </tr>
+      <tr v-for="ing in ingredients" :key="ing.uniqueIngredientID">
+        <td>{{ ing.ingredientID }}</td>
+        <td>{{ ing.pantryID }}</td>
+        <td>{{ ing.expirationDate }}</td>
+        <td>
+          <button @click="deleteIng(ing.uniqueIngredientID)">Löschen</button>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onBeforeMount, ref} from "vue";
+import { onMounted, ref } from "vue";
 import useFetch from "@/service/useFetch";
-import {UNQINGREDIENT_ENDPOINT, DELETE_UNQING_ENDPOINT} from "@/constants";
+import { userStore } from "@/store";
+import { UNQINGREDIENT_ENDPOINT, DELETE_UNQING_ENDPOINT } from "@/constants";
 
 const ingredients = ref([]);
-const userID = '10';
+const userID = "10";
+const user = userStore();
 
 const fetch = async () => {
-  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(userID), 'GET');
+  console.log("mount!");
+  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(userID), "GET");
   ingredients.value = data;
 };
 
 const deleteIng = async (ungIngID: number) => {
-  await useFetch(DELETE_UNQING_ENDPOINT.concat(ungIngID.toString()), 'DELETE');
-}
+  await useFetch(DELETE_UNQING_ENDPOINT.concat(ungIngID.toString()), "DELETE");
+};
 
-onBeforeMount(fetch);
+onMounted(fetch);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
