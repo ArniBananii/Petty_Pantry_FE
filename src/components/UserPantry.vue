@@ -17,27 +17,28 @@
         </td>
       </tr>
     </table>
+    <AddIngredient></AddIngredient>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import useFetch from "@/service/useFetch";
-import { userStore } from "@/store";
 import { UNQINGREDIENT_ENDPOINT, DELETE_UNQING_ENDPOINT } from "@/constants";
+import AddIngredient from "@/components/AddIngredient.vue";
 
 const ingredients = ref([]);
-const userID = "10";
-const user = userStore();
 
 const fetch = async () => {
   console.log("mount!");
-  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(userID), "GET");
+  const currentUser = localStorage.getItem("user")
+  const parsedUser = JSON.parse(currentUser || "");
+  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(parsedUser.userID), "GET");
   ingredients.value = data;
 };
 
-const deleteIng = async (ungIngID: number) => {
-  await useFetch(DELETE_UNQING_ENDPOINT.concat(ungIngID.toString()), "DELETE");
+const deleteIng = async (unqIngID: number) => {
+  await useFetch(DELETE_UNQING_ENDPOINT.concat(unqIngID.toString()), "DELETE");
 };
 
 onMounted(fetch);

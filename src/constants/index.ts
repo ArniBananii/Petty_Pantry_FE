@@ -20,3 +20,6 @@ export const SINGLE_USER_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
 export const USER_REGISTER_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_REGISTER
 );
+export const USER_PANTRY_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
+    import.meta.env.VITE_ENDPOINT_PANTRY
+);

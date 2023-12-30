@@ -9,12 +9,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import {onMounted, ref} from "vue";
 import useFetch from "@/service/useFetch";
-import { INGREDIENTS_ENDPOINT, POST_UNQING_ENDPOINT } from "@/constants";
+import {INGREDIENTS_ENDPOINT, POST_UNQING_ENDPOINT, USER_PANTRY_ENDPOINT} from "@/constants";
+import {userStore} from "@/store";
 
-const postUrl = "http://localhost:8080/api/v1/unqingredient";
 const ingredients = ref([]);
+const user = userStore();
+const pantryID = ref(null);
 
 const fetch = async () => {
   const data = await useFetch(INGREDIENTS_ENDPOINT, "GET");
@@ -23,14 +25,20 @@ const fetch = async () => {
 
 const insertIngredients = async (ingredientID: number) => {
   const body = {
-    //dummy data
     pantryID: 12,
     ingredientID: ingredientID,
   };
   await useFetch(POST_UNQING_ENDPOINT, "POST", body);
 };
 
+const findPantry = async () => {
+  const currentUser = localStorage.getItem("user")
+  const parsedUser = JSON.parse(currentUser || "");
+  pantryID.value = await useFetch(USER_PANTRY_ENDPOINT.concat(parsedUser.userID), "GET");
+};
+
 onMounted(fetch);
+onMounted(findPantry);
 </script>
 
 <style scoped></style>

@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly VITE_FRONTEND_BASE_URL: string;
   readonly VITE_ENDPOINT_POSTUNQING: string;
   readonly VITE_ENDPOINT_DELETEUNQING: string;
+  readonly VITE_ENDPOINT_PANTRY: string;
 }
 
 interface ImportMeta {
