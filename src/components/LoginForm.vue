@@ -30,12 +30,16 @@ const login = async () => {
     password: password.value,
   });
 
+  console.log("data", data);
+
   data.then((res) => {
-    if (res !== 404 && res.userName !== undefined) {
+    if (res) {
+      console.log("res", res);
       user.login(res.userName, res.password, res.userID, true);
       localStorage.setItem("user", JSON.stringify(user.userState));
       router.push({ name: "pantry" });
     } else {
+      console.log("res", res);
       console.log("User not found");
     }
   });

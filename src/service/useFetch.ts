@@ -7,9 +7,7 @@ async function useFetch(url: string, requestType: string, dataToProcess?: any) {
       },
       body: JSON.stringify(dataToProcess),
     });
-    if (requestType === "DELETE" || requestType === "POST") {
-      return response.status.toString() as any;
-    }
+
     const data: any = await response.json();
     return data;
   } catch (error) {
