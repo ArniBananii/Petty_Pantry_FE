@@ -4,20 +4,21 @@
     <table>
       <tr>
         <th>Zutat</th>
-        <th>Pantry</th>
-        <th>Ablaufdatum</th>
-        <th>Aktionen</th>
+        <th>Aktion</th>
       </tr>
       <tr v-for="ing in ingredients" :key="ing.uniqueIngredientID">
-        <td>{{ ing.ingredientID }}</td>
-        <td>{{ ing.pantryID }}</td>
-        <td>{{ ing.expirationDate }}</td>
         <td>
-          <button @click="deleteIng(ing.uniqueIngredientID)">Löschen</button>
+          <IngredientComponent
+            :ingredientID="ing.ingredientID"
+            :expirationDate="ing.expirationDate"
+          />
+        </td>
+        <td>
+          <button @click="addToRemove(ing.uniqueIngredientID)">Löschen</button>
         </td>
       </tr>
     </table>
-    <AddIngredient></AddIngredient>
+    <button @click="deleteIngredient()">Fertig!</button>
   </div>
 </template>
 
@@ -25,22 +26,40 @@
 import { onMounted, ref } from "vue";
 import useFetch from "@/service/useFetch";
 import { UNQINGREDIENT_ENDPOINT, DELETE_UNQING_ENDPOINT } from "@/constants";
-import AddIngredient from "@/components/AddIngredient.vue";
+import IngredientComponent from "@/components/IngredientComponent.vue";
 
-const ingredients = ref([]);
-
+const ingredients = ref([]) as any;
+const ingredientToRemove = ref([]) as any;
+const currentUser = localStorage.getItem("user");
+const parsedCurrentUser = JSON.parse(currentUser ?? "");
 const fetch = async () => {
   console.log("mount!");
-  const currentUser = localStorage.getItem("user")
-  const parsedUser = JSON.parse(currentUser || "");
-  const data = await useFetch(UNQINGREDIENT_ENDPOINT.concat(parsedUser.userID), "GET");
+
+  const data = await useFetch(
+    UNQINGREDIENT_ENDPOINT.concat(parsedCurrentUser.userID),
+    "GET"
+  );
   ingredients.value = data;
 };
 
-const deleteIng = async (unqIngID: number) => {
-  await useFetch(DELETE_UNQING_ENDPOINT.concat(unqIngID.toString()), "DELETE");
+const deleteIngredient = async () => {
+  await useFetch(DELETE_UNQING_ENDPOINT, "DELETE", {
+    UnqIDs: ingredientToRemove.value,
+  });
 };
 
+const addToRemove = (unqIngIDToRemove: number) => {
+  ingredientToRemove.value.push(unqIngIDToRemove);
+
+  const index = ingredients.value.findIndex(
+    (ing: { uniqueIngredientID: number }) =>
+      ing.uniqueIngredientID === unqIngIDToRemove
+  );
+  console.log("index", index);
+  if (index > -1) {
+    ingredients.value.splice(index, 1);
+  }
+};
 onMounted(fetch);
 </script>
 

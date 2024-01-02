@@ -1,8 +1,4 @@
-async function useFetch(
-  url: string,
-  requestType: string,
-  dataToProcess?: any
-) {
+async function useFetch(url: string, requestType: string, dataToProcess?: any) {
   try {
     const response = await fetch(url, {
       method: requestType,
@@ -11,7 +7,7 @@ async function useFetch(
       },
       body: JSON.stringify(dataToProcess),
     });
-    if (!response.ok) {
+    if (requestType === "DELETE" || requestType === "POST") {
       return response.status.toString() as any;
     }
     const data: any = await response.json();

@@ -1,10 +1,22 @@
 import { defineStore } from "pinia";
+import type { forEachChild } from "typescript";
 
 type UserStatus = {
   loggedIn: boolean;
   userName: string;
   userPassword: string;
   userID: number;
+};
+
+type PantryStore = {
+  pantryID: number;
+  uniqueIngredients: Ingredient[];
+};
+
+type Ingredient = {
+  ingredientID: number;
+  ingredientName: string;
+  urlImage: string;
 };
 
 export const userStore = defineStore("userStore", {
@@ -47,6 +59,25 @@ export const userStore = defineStore("userStore", {
     },
     getUserID(): number {
       return this.userState.userID;
+    },
+  },
+});
+
+export const pantryStore = defineStore("pantryStore", {
+  state: () => ({
+    pantryState: {
+      pantryID: 0,
+      uniqueIngredients: [] as Ingredient[],
+    } as PantryStore,
+  }),
+  actions: {
+    deleteIngredient(uniqueIngredientToDelete: Ingredient) {
+      const index = this.pantryState.uniqueIngredients.indexOf(
+        uniqueIngredientToDelete
+      );
+      if (index > -1) {
+        this.pantryState.uniqueIngredients.splice(index, 1);
+      }
     },
   },
 });

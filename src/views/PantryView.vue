@@ -1,15 +1,18 @@
 <template>
   <div class="pantry_view">
     <UserPantry />
+    <AddIngredient />
   </div>
 </template>
 
 <script lang="ts">
+import AddIngredient from "@/components/AddIngredient.vue";
 import UserPantry from "@/components/UserPantry.vue";
 export default {
   name: "PantryView",
   components: {
     UserPantry,
+    AddIngredient,
   },
 };
 </script>
