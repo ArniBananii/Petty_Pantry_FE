@@ -2,7 +2,7 @@
   <div>
     <input type="text" v-model="userName" placeholder="Username" required />
     <input type="password" v-model="password" placeholder="Password" required />
-    <button @click="login">Login</button>
+    <button class="btn btn-warning mt-2" @click="login">Login</button>
     <div>{{ userName }}</div>
     <RouterLink to="/registration">U have no ACCOUNT?! click here!</RouterLink>
     <div>
@@ -17,6 +17,7 @@ import useFetch from "@/service/useFetch";
 import { useRouter } from "vue-router";
 import { userStore } from "@/store";
 import { ref } from "vue";
+import 'bootstrap/dist/css/bootstrap.css'
 
 const userName = ref("");
 const password = ref("");
