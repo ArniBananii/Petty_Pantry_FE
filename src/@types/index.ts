@@ -6,12 +6,19 @@ export type UserStatus = {
 };
 
 export interface PantryStore {
-  uniqueIngredients: uniqueIngredient[];
+  uniqueIngredients: UniqueIngredient[];
 }
 
-export type uniqueIngredient = {
+export type UniqueIngredient = {
   uniqueIngredientID: number;
   pantryID: string;
   ingredientID: number;
-  expirationDate: Array<number>;
+  expirationDate: Date;
+};
+
+export type Ingredient = {
+  ingredientID: number;
+  ingredientName: string;
+  validNoOfDays: number;
+  imageURL: string;
 };

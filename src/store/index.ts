@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { PantryStore, UserStatus, uniqueIngredient } from "@/@types";
+import type { PantryStore, UserStatus, UniqueIngredient } from "@/@types";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
@@ -52,7 +52,7 @@ export const pantryStore = defineStore("pantryStore", {
     } as PantryStore,
   }),
   actions: {
-    deleteUniqueIngredient(uniqueIngredientToDelete: uniqueIngredient) {
+    deleteUniqueIngredient(uniqueIngredientToDelete: UniqueIngredient) {
       const index = this.pantryState.uniqueIngredients.indexOf(
         uniqueIngredientToDelete
       );
@@ -61,15 +61,15 @@ export const pantryStore = defineStore("pantryStore", {
       }
     },
     //may not be used!
-    addUniqueIngredient(newIngredient: uniqueIngredient) {
+    addUniqueIngredient(newIngredient: UniqueIngredient) {
       this.pantryState.uniqueIngredients.push(newIngredient);
     },
-    isNow(uniqueIngredient: uniqueIngredient[]) {
+    isNow(uniqueIngredient: UniqueIngredient[]) {
       this.pantryState.uniqueIngredients = uniqueIngredient;
     },
   },
   getters: {
-    getUniqueIngredients(): uniqueIngredient[] {
+    getUniqueIngredients(): UniqueIngredient[] {
       return this.pantryState.uniqueIngredients;
     },
   },

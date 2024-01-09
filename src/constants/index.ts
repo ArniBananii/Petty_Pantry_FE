@@ -1,3 +1,4 @@
+// Type: TypeScript constant file
 export const BASE_BACKEND_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 export const USERS_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_USERS
@@ -29,3 +30,4 @@ export const INGREDIENT_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
 export const DELETE_UNIQUE_INGR_TEST = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_DELETETEST
 );
+export const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY;

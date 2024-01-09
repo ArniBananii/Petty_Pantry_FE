@@ -1,12 +1,20 @@
 <template>
-  <div class="pantry_view">
-    <UserPantry />
-    <AddIngredient />
+  <div class="top-div">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Your Pantry</a>
+      </li>
+      <li>
+        <a class="nav-link" href="/addIngredient">Add Ingredients</a>
+      </li>
+    </ul>
+    <div class="pantry_view">
+      <UserPantry />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import AddIngredient from "@/components/AddIngredient.vue";
 import UserPantry from "@/components/UserPantry.vue";
 </script>
 <style>

@@ -8,48 +8,46 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, onUpdated, ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 import IngredientComponent from "./IngredientComponent.vue";
-import useFetch from "@/service/useFetch";
+import { useFetch } from "@vueuse/core";
 import {
   INGREDIENTS_ENDPOINT,
   POST_UNQING_ENDPOINT,
   USER_PANTRY_ENDPOINT,
 } from "@/constants";
+import type { Ingredient } from "@/@types";
 
-const ingredients = ref([]) as any;
-const pantryID = ref(0);
-const instance = getCurrentInstance();
-console.log("instance", instance);
-
-const findPantry = async () => {
-  const currentUser = localStorage.getItem("user");
-  const parsedUser = JSON.parse(currentUser ?? "");
-
-  const data = await useFetch(
-    USER_PANTRY_ENDPOINT.concat(parsedUser.userID),
-    "GET"
-  );
-  pantryID.value = data.pantryID;
-};
-
-const fetchAllIngredients = async () => {
-  const data = await useFetch(INGREDIENTS_ENDPOINT, "GET");
-  ingredients.value = data;
-};
+const ingredients = ref([] as Ingredient[]) as Ref<Ingredient[]>;
+const pantryID = ref(0) as Ref<number>;
+const user = JSON.parse(localStorage.getItem("user") ?? "");
 
 const insertIngredients = async (ingredientID: number, pantryID: number) => {
-  const body = {
+  const postBody = {
     pantryID: pantryID,
     ingredientID: ingredientID,
   };
-  await useFetch(POST_UNQING_ENDPOINT, "POST", body);
+
+  //const { execute } deconstructing to trigger the fetch when wanted!
+  await useFetch(`${POST_UNQING_ENDPOINT}`).post(postBody);
 };
 
-onMounted(fetchAllIngredients);
-onMounted(findPantry);
-onUpdated(() => {
-  console.log("TEST UPDATE");
+onMounted(async () => {
+  try {
+    const ingredientResponse = await useFetch(`${INGREDIENTS_ENDPOINT}`)
+      .get()
+      .json();
+    const uniquePantryIdResponse = await useFetch(
+      `${USER_PANTRY_ENDPOINT}${user.userID}`
+    )
+      .get()
+      .json();
+
+    ingredients.value = ingredientResponse.data.value;
+    pantryID.value = uniquePantryIdResponse.data.value.pantryID;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 });
 </script>
 

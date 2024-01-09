@@ -15,7 +15,7 @@
 import { SINGLE_USER_ENDPOINT } from "@/constants";
 import useFetch from "@/service/useFetch";
 import { useRouter } from "vue-router";
-import { pantryStore, userStore } from "@/store";
+import {  userStore } from "@/store";
 import { ref } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -31,7 +31,7 @@ const login = async () => {
     password: password.value,
   });
 
-  console.log("data", data);
+ 
 
   data.then((res) => {
     if (res) {
