@@ -1,23 +1,5 @@
 import { defineStore } from "pinia";
-import type { forEachChild } from "typescript";
-
-type UserStatus = {
-  loggedIn: boolean;
-  userName: string;
-  userPassword: string;
-  userID: number;
-};
-
-type PantryStore = {
-  pantryID: number;
-  uniqueIngredients: Ingredient[];
-};
-
-type Ingredient = {
-  ingredientID: number;
-  ingredientName: string;
-  urlImage: string;
-};
+import type { PantryStore, UserStatus, uniqueIngredient } from "@/@types";
 
 export const userStore = defineStore("userStore", {
   state: () => ({
@@ -66,18 +48,29 @@ export const userStore = defineStore("userStore", {
 export const pantryStore = defineStore("pantryStore", {
   state: () => ({
     pantryState: {
-      pantryID: 0,
-      uniqueIngredients: [] as Ingredient[],
+      uniqueIngredients: [],
     } as PantryStore,
   }),
   actions: {
-    deleteIngredient(uniqueIngredientToDelete: Ingredient) {
+    deleteUniqueIngredient(uniqueIngredientToDelete: uniqueIngredient) {
       const index = this.pantryState.uniqueIngredients.indexOf(
         uniqueIngredientToDelete
       );
       if (index > -1) {
         this.pantryState.uniqueIngredients.splice(index, 1);
       }
+    },
+    //may not be used!
+    addUniqueIngredient(newIngredient: uniqueIngredient) {
+      this.pantryState.uniqueIngredients.push(newIngredient);
+    },
+    isNow(uniqueIngredient: uniqueIngredient[]) {
+      this.pantryState.uniqueIngredients = uniqueIngredient;
+    },
+  },
+  getters: {
+    getUniqueIngredients(): uniqueIngredient[] {
+      return this.pantryState.uniqueIngredients;
     },
   },
 });

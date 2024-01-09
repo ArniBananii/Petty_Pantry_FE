@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { getCurrentInstance, onMounted, onUpdated, ref } from "vue";
 import IngredientComponent from "./IngredientComponent.vue";
 import useFetch from "@/service/useFetch";
 import {
@@ -48,6 +48,9 @@ const insertIngredients = async (ingredientID: number, pantryID: number) => {
 
 onMounted(fetchAllIngredients);
 onMounted(findPantry);
+onUpdated(() => {
+  console.log("TEST UPDATE");
+});
 </script>
 
 <style scoped></style>

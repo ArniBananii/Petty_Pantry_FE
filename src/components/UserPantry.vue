@@ -6,61 +6,62 @@
         <th>Zutat</th>
         <th>Aktion</th>
       </tr>
-      <tr v-for="ing in ingredients" :key="ing.uniqueIngredientID">
+      <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
         <td>
-          <IngredientComponent
-            :ingredientID="ing.ingredientID"
-            :expirationDate="ing.expirationDate"
-          />
+          <IngredientComponent :ingredientID="ing.ingredientID" />
         </td>
         <td>
-          <button @click="addToRemove(ing.uniqueIngredientID)">Löschen</button>
+          <button v-if="ing" @click="deleteIngredient(ing.uniqueIngredientID)">
+            Löschen TEST!
+          </button>
         </td>
       </tr>
     </table>
-    <button @click="deleteIngredient()">Fertig!</button>
+    <!-- <button @click="deleteIngredient()">Fertig!</button> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import useFetch from "@/service/useFetch";
-import { UNQINGREDIENT_ENDPOINT, DELETE_UNQING_ENDPOINT } from "@/constants";
+import { nextTick, onMounted, onUpdated, ref, type Ref } from "vue";
+import { useFetch } from "@vueuse/core";
+import {
+  DELETE_UNQING_ENDPOINT,
+  UNIQUE_INGREDIENTS_USER_ENDPOINT,
+  DELETE_UNIQUE_INGR_TEST,
+} from "@/constants";
 import IngredientComponent from "@/components/IngredientComponent.vue";
+import { pantryStore } from "@/store";
+import type { uniqueIngredient } from "@/@types";
 
-const ingredients = ref([]) as any;
-const ingredientToRemove = ref([]) as any;
-const currentUser = localStorage.getItem("user");
-const parsedCurrentUser = JSON.parse(currentUser ?? "");
-const fetch = async () => {
-  console.log("mount!");
+const pantry = pantryStore();
+const user = JSON.parse(localStorage.getItem("user") ?? "");
+const uniqueIngredients = ref([]) as Ref<uniqueIngredient[]>;
 
-  const data = await useFetch(
-    UNQINGREDIENT_ENDPOINT.concat(parsedCurrentUser.userID),
-    "GET"
+uniqueIngredients.value = pantry.getUniqueIngredients;
+
+const deleteIngredient = async (unqIngIDToRemove: number) => {
+  useFetch(`${DELETE_UNIQUE_INGR_TEST}${unqIngIDToRemove}`).delete();
+  uniqueIngredients.value = uniqueIngredients.value.filter(
+    (ing) => ing.uniqueIngredientID !== unqIngIDToRemove
   );
-  ingredients.value = data;
 };
 
-const deleteIngredient = async () => {
-  await useFetch(DELETE_UNQING_ENDPOINT, "DELETE", {
-    UnqIDs: ingredientToRemove.value,
-  });
-};
+onMounted(async () => {
+  try {
+    const response = await useFetch(
+      `${UNIQUE_INGREDIENTS_USER_ENDPOINT}${user.userID}`
+    )
+      .get()
+      .json();
+    //add response to pantryStore!
+    uniqueIngredients.value = response.data.value;
 
-const addToRemove = (unqIngIDToRemove: number) => {
-  ingredientToRemove.value.push(unqIngIDToRemove);
-
-  const index = ingredients.value.findIndex(
-    (ing: { uniqueIngredientID: number }) =>
-      ing.uniqueIngredientID === unqIngIDToRemove
-  );
-  console.log("index", index);
-  if (index > -1) {
-    ingredients.value.splice(index, 1);
+    console.log("uniqueData", response.data.value);
+    console.log("pantry.getUniqueIngredients", pantry.getUniqueIngredients);
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
-};
-onMounted(fetch);
+});
 </script>
 
 <style scoped></style>

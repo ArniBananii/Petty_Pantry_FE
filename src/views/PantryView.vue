@@ -5,16 +5,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import AddIngredient from "@/components/AddIngredient.vue";
 import UserPantry from "@/components/UserPantry.vue";
-export default {
-  name: "PantryView",
-  components: {
-    UserPantry,
-    AddIngredient,
-  },
-};
 </script>
 <style>
 @media (min-width: 1024px) {

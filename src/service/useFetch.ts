@@ -1,3 +1,4 @@
+//THIS IS POTENTIALLY BEING DEPRECATED!
 async function useFetch(url: string, requestType: string, dataToProcess?: any) {
   try {
     const response = await fetch(url, {

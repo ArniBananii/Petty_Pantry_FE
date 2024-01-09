@@ -2,8 +2,8 @@ export const BASE_BACKEND_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 export const USERS_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_USERS
 );
-export const UNQINGREDIENT_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
-  import.meta.env.VITE_ENDPOINT_UNQINGUSER
+export const UNIQUE_INGREDIENTS_USER_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
+  import.meta.env.VITE_UNIQUE_INGREDIENTS_USER_ENDPOINT
 );
 export const POST_UNQING_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_POSTUNQING
@@ -25,4 +25,7 @@ export const USER_PANTRY_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
 );
 export const INGREDIENT_ENDPOINT = `${BASE_BACKEND_URL}`.concat(
   import.meta.env.VITE_ENDPOINT_INGREDIENT
+);
+export const DELETE_UNIQUE_INGR_TEST = `${BASE_BACKEND_URL}`.concat(
+  import.meta.env.VITE_ENDPOINT_DELETETEST
 );
