@@ -1,7 +1,9 @@
 <template>
-  <img :src="ingredientUrl" alt="pipi" loading="lazy" />
+  <div class="" style="vertical-align: middle">
+    <img :src="ingredientUrl" alt="pipi" loading="lazy" />
+  </div>
   <span>{{ ingredientName }}</span> |
-  <span>{{ ingredientExpirationDate }}</span>
+  <span>{{ ingredientExpirationDate }}D</span>
 </template>
 
 <script setup lang="ts">
@@ -26,13 +28,7 @@ onMounted(async () => {
       .get()
       .json();
 
-    if (prop.uniqueIngredientExperationDate) {
-      const date = new Date(prop.uniqueIngredientExperationDate);
-      ingredientExpirationDate.value = date.toLocaleDateString();
-    } else {
-      ingredientExpirationDate.value = response.data.value.validNoOfDays;
-    }
-
+    ingredientExpirationDate.value = response.data.value.validNoOfDays;
     ingredientName.value = response.data.value.ingredientName;
     ingredientUrl.value = response.data.value.imageURL;
   } catch (error) {

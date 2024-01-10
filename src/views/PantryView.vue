@@ -1,5 +1,5 @@
 <template>
-  <div class="top-div">
+  <div class="pantry-view">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="#">Your Pantry</a>
@@ -17,12 +17,12 @@
 <script lang="ts" setup>
 import UserPantry from "@/components/UserPantry.vue";
 </script>
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped>
+.pantry-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 </style>

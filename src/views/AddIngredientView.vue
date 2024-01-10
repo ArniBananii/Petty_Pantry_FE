@@ -1,5 +1,5 @@
 <template>
-  <div class="top-div">
+  <div class="addIngredient-view">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="/pantry">Your Pantry</a>
@@ -18,10 +18,12 @@
 import AddIngredient from "@/components/AddIngredient.vue";
 </script>
 
-<style>
-.grid-container {
-  display: grid;
-  place-items: center;
+<style scoped>
+.addIngredient-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 }
 </style>

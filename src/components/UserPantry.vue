@@ -7,25 +7,31 @@
     <div>
       <table class="table table-bordered">
         <thead>
-        <tr>
-          <th scope="col">Zutat</th>
-          <th scope="col">Aktion</th>
-        </tr>
+          <tr>
+            <th scope="col">Zutat</th>
+            <th scope="col">Ablaufdatum</th>
+            <th scope="col">Aktion</th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
-          <td>
-            <IngredientComponent
-                :ingredientID="ing.ingredientID"
-                :uniqueIngredientExperationDate="ing.expirationDate"
-            />
-          </td>
-          <td class="text-center" style="vertical-align: middle">
-            <button v-if="ing" @click="deleteIngredient(ing.uniqueIngredientID)" class="btn btn-danger ">
-              Delete
-            </button>
-          </td>
-        </tr>
+          <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
+            <td>
+              <IngredientComponent :ingredientID="ing.ingredientID" />
+            </td>
+            <td class="text-center" style="vertical-align: middle">
+              <span>{{ dateTransform(ing.expirationDate) }}</span>
+            </td>
+
+            <td class="text-center" style="vertical-align: middle">
+              <button
+                v-if="ing"
+                @click="deleteIngredient(ing.uniqueIngredientID)"
+                class="btn btn-danger"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -71,6 +77,11 @@ onMounted(async () => {
     console.error("Error fetching data:", error);
   }
 });
+// transform date!
+const dateTransform = (date: Date) => {
+  date = new Date(date);
+  return date.toLocaleDateString();
+};
 </script>
 
 <style scoped>

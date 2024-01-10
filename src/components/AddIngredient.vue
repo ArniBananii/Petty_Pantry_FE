@@ -1,21 +1,23 @@
 <template>
   <div class="text-center mt-3">
-    <h1>Arsenal der Zutaten</h1>
+    <h2>Arsenal der Zutaten</h2>
     <h2>Füge deine Zutaten zu deinem Pantry dazu!</h2>
     <div class="container">
       <div class="row" v-for="ing in ingredients" :key="ing.ingredientID">
         <div class="col ingredient-container">
-          <div class="ingredient-image">
-            <IngredientComponent
-                :ingredientID="ing.ingredientID"
-            />
+          <div class="ingredient-component">
+            <IngredientComponent :ingredientID="ing.ingredientID" />
+            <button
+              @click="insertIngredients(ing.ingredientID, pantryID)"
+              class="btn btn-success button-overlay"
+            >
+              Add
+            </button>
           </div>
-            <button @click="insertIngredients(ing.ingredientID, pantryID)" class="btn btn-success button-overlay">Add</button>
-          </div>
+        </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
@@ -69,7 +71,7 @@ onMounted(async () => {
   overflow: hidden;
 }
 
-.ingredient-image {
+.ingredient-component {
   position: relative;
   overflow: hidden;
 }
@@ -87,19 +89,20 @@ onMounted(async () => {
   opacity: 1;
 }
 
-.ingredient-container:hover .ingredient-image::before {
-  content: '';
-  position: absolute;
+.ingredient-container:hover {
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(43, 152, 10, 0.5);
 }
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
 }
 </style>
