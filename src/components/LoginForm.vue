@@ -1,11 +1,18 @@
 <template>
   <div>
-    <input type="text" v-model="userName" placeholder="Username" required />
-    <input type="password" v-model="password" placeholder="Password" required />
-    <button class="btn btn-warning mt-2" @click="login">Login</button>
-    <div>{{ userName }}</div>
-    <RouterLink to="/registration">U have no ACCOUNT?! click here!</RouterLink>
-    <div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" style="width: 17.5%" id="basic-addon1">@</span>
+      <input class="form-control" type="text" v-model="userName" placeholder="Username" required />
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" style="width: 17.5%" id="basic-addon2">*</span>
+      <input class="form-control" type="password" v-model="password" placeholder="Password" required />
+    </div>
+    <button class="btn btn-warning mb-3" @click="login">Login</button>
+    <div class="text-center">
+      <RouterLink to="/registration">Dont have an account? Click here!</RouterLink>
+    </div>
+    <div v-bind:class="{ 'text-success' : user.isLoggedIn, 'text-danger' : !user.isLoggedIn}" class="text-center">
       {{ user.isLoggedIn ? "Logged in" : "Not logged in" }}
     </div>
   </div>

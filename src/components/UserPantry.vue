@@ -1,28 +1,34 @@
 <template>
-  <h1>Dein Pantry</h1>
-  <div class="api-text">
-    <RecipeComponent />
-  </div>
-  <div>
-    <table>
-      <tr>
-        <th>Zutat</th>
-        <th>Aktion</th>
-      </tr>
-      <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
-        <td>
-          <IngredientComponent
-            :ingredientID="ing.ingredientID"
-            :uniqueIngredientExperationDate="ing.expirationDate"
-          />
-        </td>
-        <td>
-          <button v-if="ing" @click="deleteIngredient(ing.uniqueIngredientID)">
-            Löschen TEST!
-          </button>
-        </td>
-      </tr>
-    </table>
+  <div class="container mt-5">
+    <h1 class="mb-4">Dein Pantry</h1>
+    <div class="api-text">
+      <RecipeComponent />
+    </div>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Zutat</th>
+          <th scope="col">Aktion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
+          <td>
+            <IngredientComponent
+                :ingredientID="ing.ingredientID"
+                :uniqueIngredientExperationDate="ing.expirationDate"
+            />
+          </td>
+          <td class="text-center" style="vertical-align: middle">
+            <button v-if="ing" @click="deleteIngredient(ing.uniqueIngredientID)" class="btn btn-danger ">
+              Delete
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

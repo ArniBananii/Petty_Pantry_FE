@@ -1,6 +1,6 @@
 <template>
   <div class="registration-view">
-    <h1>Registration</h1>
+    <h1 class="display-4 text-center fw-bold">Registration</h1>
 
     <RegistrationForm />
   </div>

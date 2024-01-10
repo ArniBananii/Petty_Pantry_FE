@@ -20,7 +20,7 @@ const chatModel = new ChatOpenAI({
 const prompt = ChatPromptTemplate.fromMessages([
   [
     "human",
-    "You are a world class cook that will help us create a receipe for a delicious meal out of the given ingredients.",
+    "You are a world class cook that will help us create a recipe for a delicious meal out of the given ingredients.",
   ],
   ["user", "{input}"],
 ]);

@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <h1>Login</h1>
+    <h1 class="display-4 text-center fw-bold">Login</h1>
 
     <LoginForm />
   </div>
@@ -16,6 +16,7 @@ export default {
   },
 };
 </script>
+import "bootstrap/dist/css/bootstrap.css";
 
 <style scoped>
 .login-view {
