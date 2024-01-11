@@ -89,13 +89,14 @@ onMounted(async () => {
   opacity: 1;
 }
 
-.ingredient-container:hover {
-  position: relative;
+.ingredient-container:hover .ingredient-component::before{
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(43, 152, 10, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .container {
