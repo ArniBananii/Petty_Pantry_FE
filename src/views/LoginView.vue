@@ -1,7 +1,6 @@
 <template>
   <div class="login-view">
-    <h1 class="display-4 text-center fw-bold">Login</h1>
-
+    <h1 class="display-4 text-center fw-bold" style="color: white">Login</h1>
     <LoginForm />
   </div>
 </template>

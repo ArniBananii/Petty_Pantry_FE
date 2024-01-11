@@ -8,7 +8,7 @@
       <span class="input-group-text" style="width: 17.5%" id="basic-addon1">*</span>
       <input class="form-control" type="password" v-model="password" placeholder="Password" required />
     </div>
-    <button class="btn btn-warning mb-3" @click="register">Go!</button>
+    <button class="btn mb-3" style="background-color: coral; color: white" @click="register">Go!</button>
     <div>{{ userName }}</div>
     <div class="text-center">
       <RouterLink to="/login">Back to Login</RouterLink>

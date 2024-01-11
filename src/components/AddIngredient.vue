@@ -1,15 +1,15 @@
 <template>
   <div class="text-center mt-3">
-    <h2>Arsenal der Zutaten</h2>
-    <h2>Füge deine Zutaten zu deinem Pantry dazu!</h2>
+    <h2 style="color: white">Arsenal of Ingredients</h2>
+    <h2 style="color: white">Add your Ingredients to your Pantry!</h2>
     <div class="container">
       <div class="row" v-for="ing in ingredients" :key="ing.ingredientID">
         <div class="col ingredient-container">
           <div class="ingredient-component">
-            <IngredientComponent :ingredientID="ing.ingredientID" />
+            <IngredientComponent :ingredientID="ing.ingredientID"/>
             <button
               @click="insertIngredients(ing.ingredientID, pantryID)"
-              class="btn btn-success button-overlay"
+              class="btn button-overlay" style="background-color: coral; color: white"
             >
               Add
             </button>
@@ -96,7 +96,18 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   height: 100%;
+  border: solid coral;
   background: rgba(0, 0, 0, 0.5);
+  animation: borderGrow 0.5s forwards;
+}
+
+@keyframes borderGrow {
+  from {
+    border-width: 0;
+  }
+  to {
+    border-width: 7px;
+  }
 }
 
 .container {

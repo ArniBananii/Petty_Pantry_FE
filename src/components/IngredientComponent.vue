@@ -2,8 +2,9 @@
   <div class="" style="vertical-align: middle">
     <img :src="ingredientUrl" alt="pipi" loading="lazy" />
   </div>
-  <span>{{ ingredientName }}</span> |
-  <span>{{ ingredientExpirationDate }}D</span>
+  <span style="color: white">{{ ingredientName }}</span>
+  <i style="color: white"> | </i>
+  <span style="color: white;">{{ ingredientExpirationDate }}D</span>
 </template>
 
 <script setup lang="ts">

@@ -1,14 +1,19 @@
 <template>
   <div class="addIngredient-view">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/pantry">Your Pantry</a>
-      </li>
-      <li>
-        <a class="nav-link active deactivate">Add Ingredients</a>
-      </li>
-    </ul>
-    <div class="pantry_view">
+    <div class="container">
+      <ul class="nav nav-underline" style="top: 2px; width: 50%; z-index: 1000">
+        <li class="nav-item">
+          <a class="nav-link" href="/pantry" style="color: white">Your Pantry</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" style="color: coral" href="#" aria-current="page">Add Ingredients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: white">About us</a>
+        </li>
+      </ul>
+    </div>
+    <div class="container addIngredient-view">
       <AddIngredient />
     </div>
   </div>
@@ -20,10 +25,11 @@ import AddIngredient from "@/components/AddIngredient.vue";
 
 <style scoped>
 .addIngredient-view {
+  padding-top: 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
+  overflow-y: auto;
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <div>{{ answere.content }}</div>
+  <div class="form-control text-format">
+    {{ answere.content }}
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -34,3 +36,12 @@ onMounted(async () => {
   console.log("answere", answere.value.content);
 });
 </script>
+
+<style scoped>
+.text-format {
+  max-height: 1000px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+</style>

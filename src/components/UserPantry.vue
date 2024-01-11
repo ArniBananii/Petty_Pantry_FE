@@ -1,16 +1,12 @@
 <template>
   <div class="container mt-5">
-    <h1 class="mb-4">Dein Pantry</h1>
-    <div class="api-text">
-      <RecipeComponent />
-    </div>
-    <div>
-      <table class="table table-bordered">
+    <div class="row">
+      <table class="table table-bordered col">
         <thead>
           <tr>
-            <th scope="col">Zutat</th>
-            <th scope="col">Ablaufdatum</th>
-            <th scope="col">Aktion</th>
+            <th scope="col">Ingredient</th>
+            <th scope="col">Expiration-Date</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -26,7 +22,7 @@
               <button
                 v-if="ing"
                 @click="deleteIngredient(ing.uniqueIngredientID)"
-                class="btn btn-danger"
+                class="btn" style="background-color: coral; color: white"
               >
                 Delete
               </button>
@@ -34,6 +30,9 @@
           </tr>
         </tbody>
       </table>
+      <div class="api-text col">
+        <RecipeComponent />
+      </div>
     </div>
   </div>
 </template>
