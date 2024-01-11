@@ -85,11 +85,11 @@ onMounted(async () => {
   transition: opacity 0.3s;
 }
 
-.ingredient-container:hover .button-overlay {
+.ingredient-component:hover .button-overlay {
   opacity: 1;
 }
 
-.ingredient-container:hover .ingredient-component::before{
+.ingredient-component:hover::before{
   content: '';
   position: absolute;
   top: 0;

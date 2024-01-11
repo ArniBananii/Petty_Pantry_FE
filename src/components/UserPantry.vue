@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
-            <td>
+            <td class="text-center" style="vertical-align: middle">
               <IngredientComponent :ingredientID="ing.ingredientID" />
             </td>
             <td class="text-center" style="vertical-align: middle">
