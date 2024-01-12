@@ -11,11 +11,12 @@
       </div>
       <button @click="login" class="btn mb-3" style="background-color: coral; color: white" >Login</button>
     </form>
-    <div class="text-center">
+    <div v-if="!isLoggedIn()" class="text-center">
       <RouterLink to="/registration">Dont have an account? Click here!</RouterLink>
     </div>
-    <div v-bind:class="{ 'text-success' : isLoggedIn(), 'text-danger' : !isLoggedIn()}" class="text-center">
-      {{ isLoggedIn() ? "Logged in" : "Not logged in" }}
+    <div class="text-center">
+      <a v-if="isLoggedIn()" class="mt-2 text-success" href="/pantry" style="text-decoration: none">Already logged in. Click here!</a>
+      <p v-else class="mt-2 text-danger">Not Logged in</p>
     </div>
   </div>
 </template>

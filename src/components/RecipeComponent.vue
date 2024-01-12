@@ -1,5 +1,10 @@
 <template>
-  <div class="form-control text-format">
+  <div class="form-control text-format" style="background-color: #181818; border: 0; color: coral">
+    <div v-if="Object.keys(answere).length == 0" class="text-center">
+      <h4 style="color: coral">
+        A fitting recipe for you is being generated...Please wait.
+      </h4>
+    </div>
     {{ answere.content }}
   </div>
 </template>
