@@ -1,7 +1,7 @@
 <template>
   <div class="pantry-view">
     <div class="container">
-      <ul class="nav nav-underline" style="top: 2px; width: 168%; z-index: 1000">
+      <ul class="nav nav-underline" style="top: 2px; width: 167%; z-index: 1000">
         <li class="nav-item">
           <a class="nav-link active" style="color: coral" aria-current="page" href="#">Your Pantry</a>
         </li>
@@ -25,6 +25,10 @@
 <script lang="ts" setup>
 import UserPantry from "@/components/UserPantry.vue";
 import router from "@/router";
+
+const deleteUser = () => {
+  return null;
+}
 
 const logOut = () => {
   localStorage.clear();
