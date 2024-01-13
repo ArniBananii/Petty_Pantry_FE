@@ -1,11 +1,11 @@
 <template>
   <div class="form-control text-format" style="background-color: #181818; border: 0; color: coral">
-    <div v-if="Object.keys(answere).length == 0" class="text-center">
+    <div v-if="Object.keys(answer).length == 0" class="text-center">
       <h4 style="color: coral">
         A fitting recipe for you is being generated...Please wait.
       </h4>
     </div>
-    {{ answere.content }}
+    {{ answer.content }}
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import { ChatPromptTemplate } from "langchain/prompts";
 import { onMounted, ref, type Ref } from "vue";
 import type { BaseMessageChunk } from "langchain/schema";
 
-const answere = ref({} as BaseMessageChunk) as Ref<BaseMessageChunk>;
+const answer = ref({} as BaseMessageChunk) as Ref<BaseMessageChunk>;
 const chatModel = new ChatOpenAI({
   openAIApiKey: OPENAI_KEY,
 });
@@ -34,11 +34,11 @@ const prompt = ChatPromptTemplate.fromMessages([
 const chain = prompt.pipe(chatModel);
 
 onMounted(async () => {
-  answere.value = await chain.invoke({
+  answer.value = await chain.invoke({
     input: "I have eggs, flour, milk, sugar, salt",
   });
 
-  console.log("answere", answere.value.content);
+  console.log("answer", answer.value.content);
 });
 </script>
 

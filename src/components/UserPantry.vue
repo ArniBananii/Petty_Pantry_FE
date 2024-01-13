@@ -1,24 +1,24 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <table class="table table-bordered col">
-        <thead>
+      <table class="table table-bordered col" style="border: none">
+        <thead class="text-center">
           <tr>
-            <th scope="col">Ingredient</th>
-            <th scope="col">Expiration-Date</th>
-            <th scope="col">Action</th>
+            <th style="background-color: coral; color: white" scope="col">Ingredient</th>
+            <th style="background-color: coral; color: white" scope="col">Expiration-Date</th>
+            <th style="background-color: coral; color: white" scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
-            <td class="text-center" style="vertical-align: middle">
+            <td class="text-center" style="vertical-align: middle; background-color: #181818">
               <IngredientComponent :ingredientID="ing.ingredientID" />
             </td>
-            <td class="text-center" style="vertical-align: middle">
+            <td class="text-center" style="vertical-align: middle; background-color: #181818; color: white">
               <span>{{ dateTransform(ing.expirationDate) }}</span>
             </td>
 
-            <td class="text-center" style="vertical-align: middle">
+            <td class="text-center" style="vertical-align: middle; background-color: #181818">
               <button
                 v-if="ing"
                 @click="deleteIngredient(ing.uniqueIngredientID)"
@@ -30,7 +30,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="api-text col">
+      <div v-if="uniqueIngredients.length > 0" class="api-text col">
         <RecipeComponent />
       </div>
     </div>

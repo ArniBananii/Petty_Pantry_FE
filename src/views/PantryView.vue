@@ -11,7 +11,10 @@
         <li class="nav-item">
           <a class="nav-link" style="color: white">About us</a>
         </li>
-        <li class="nav-item mx-lg-auto">
+        <li class="nav-item">
+          <button @click="deleteUser" class="btn btn-danger">Delete Account</button>
+        </li>
+        <li class="nav-item">
           <button @click="logOut" class="btn" style="background-color: coral; color: white">Log-Out</button>
         </li>
       </ul>
@@ -25,9 +28,15 @@
 <script lang="ts" setup>
 import UserPantry from "@/components/UserPantry.vue";
 import router from "@/router";
+import {useFetch} from "@vueuse/core";
+import {SINGLE_USER_ENDPOINT} from "@/constants";
 
-const deleteUser = () => {
-  return null;
+const user = JSON.parse(localStorage.getItem("user") ?? "");
+
+const deleteUser = async () => {
+  await useFetch(`${SINGLE_USER_ENDPOINT}/${user.userID}`).delete();
+  localStorage.clear();
+  router.push("/login");
 }
 
 const logOut = () => {
