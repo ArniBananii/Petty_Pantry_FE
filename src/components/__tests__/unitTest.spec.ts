@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vitest } from "vitest";
 import { isExperationToday } from "@/utils/checkExperation";
 import type { Ingredient, UniqueIngredient } from "@/@types";
 import { useFetch } from "@vueuse/core";
