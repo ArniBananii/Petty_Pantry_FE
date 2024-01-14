@@ -1,5 +1,9 @@
 //THIS IS POTENTIALLY BEING DEPRECATED!
-async function useFetch(url: string, requestType: string, dataToProcess?: any) {
+async function useFetch(
+  url: string,
+  requestType: string,
+  dataToProcess?: any
+): Promise<any> {
   try {
     const response = await fetch(url, {
       method: requestType,
@@ -9,7 +13,7 @@ async function useFetch(url: string, requestType: string, dataToProcess?: any) {
       body: JSON.stringify(dataToProcess),
     });
 
-    const data: any = await response.json();
+    const data = await response.json();
     return data;
   } catch (error) {
     throw new Error(

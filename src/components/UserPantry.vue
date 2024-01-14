@@ -4,25 +4,45 @@
       <table class="table table-bordered col" style="border: none">
         <thead class="text-center">
           <tr>
-            <th style="background-color: coral; color: white" scope="col">Ingredient</th>
-            <th style="background-color: coral; color: white" scope="col">Expiration-Date</th>
-            <th style="background-color: coral; color: white" scope="col">Action</th>
+            <th style="background-color: coral; color: white" scope="col">
+              Ingredient
+            </th>
+            <th style="background-color: coral; color: white" scope="col">
+              Expiration-Date
+            </th>
+            <th style="background-color: coral; color: white" scope="col">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
-            <td class="text-center" style="vertical-align: middle; background-color: #181818">
+            <td
+              class="text-center"
+              style="vertical-align: middle; background-color: #181818"
+            >
               <IngredientComponent :ingredientID="ing.ingredientID" />
             </td>
-            <td class="text-center" style="vertical-align: middle; background-color: #181818; color: white">
+            <td
+              class="text-center"
+              style="
+                vertical-align: middle;
+                background-color: #181818;
+                color: white;
+              "
+            >
               <span>{{ dateTransform(ing.expirationDate) }}</span>
             </td>
 
-            <td class="text-center" style="vertical-align: middle; background-color: #181818">
+            <td
+              class="text-center"
+              style="vertical-align: middle; background-color: #181818"
+            >
               <button
                 v-if="ing"
                 @click="deleteIngredient(ing.uniqueIngredientID)"
-                class="btn" style="background-color: coral; color: white"
+                class="btn"
+                style="background-color: coral; color: white"
               >
                 Delete
               </button>
@@ -31,7 +51,10 @@
         </tbody>
       </table>
       <div v-if="uniqueIngredients.length > 0" class="api-text col">
-        <RecipeComponent />
+        <RecipeComponent
+          v-if="uniqueIngredients.length > 0"
+          :uniqueIngredients="uniqueIngredients"
+        />
       </div>
     </div>
   </div>
@@ -52,7 +75,9 @@ import type { UniqueIngredient } from "@/@types";
 
 const pantry = pantryStore();
 const user = JSON.parse(localStorage.getItem("user") ?? "");
-const uniqueIngredients = ref([]) as Ref<UniqueIngredient[]>;
+const uniqueIngredients = ref([] as UniqueIngredient[]) as Ref<
+  UniqueIngredient[]
+>;
 
 uniqueIngredients.value = pantry.getUniqueIngredients;
 

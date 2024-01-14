@@ -14,6 +14,7 @@ export type UniqueIngredient = {
   pantryID: string;
   ingredientID: number;
   expirationDate: Date;
+  name?: string;
 };
 
 export type Ingredient = {

@@ -6,10 +6,12 @@
       <div class="row" v-for="ing in ingredients" :key="ing.ingredientID">
         <div class="col ingredient-container">
           <div class="ingredient-component">
-            <IngredientComponent :ingredientID="ing.ingredientID"/>
+            <!-- TODO: We have Ingredients so why not give props? we can unref! -->
+            <IngredientComponent :ingredientID="ing.ingredientID" />
             <button
               @click="insertIngredients(ing.ingredientID, pantryID)"
-              class="btn button-overlay" style="background-color: coral; color: white"
+              class="btn button-overlay"
+              style="background-color: coral; color: white"
             >
               Add
             </button>
@@ -33,7 +35,7 @@ import {
 import type { Ingredient } from "@/@types";
 
 const ingredients = ref([] as Ingredient[]) as Ref<Ingredient[]>;
-const pantryID = ref(0) as Ref<number>;
+const pantryID = ref(0);
 const user = JSON.parse(localStorage.getItem("user") ?? "");
 
 const insertIngredients = async (ingredientID: number, pantryID: number) => {
@@ -89,8 +91,8 @@ onMounted(async () => {
   opacity: 1;
 }
 
-.ingredient-component:hover::before{
-  content: '';
+.ingredient-component:hover::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -111,6 +113,7 @@ onMounted(async () => {
 }
 
 .container {
+  max-width: max-content;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
