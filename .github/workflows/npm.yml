@@ -18,5 +18,3 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test:unit
-        env:
-        VITE_BACKEND_BASE_URL: https://pettypantry-be.onrender.com/api/v1
