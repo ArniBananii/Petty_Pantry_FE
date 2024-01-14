@@ -2,20 +2,50 @@
   <div>
     <form @submit.prevent="login">
       <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 17.5%" id="basic-addon1">@</span>
-        <input class="form-control" type="text" v-model="userName" placeholder="Username" required />
+        <span class="input-group-text" style="width: 17.5%" id="basic-addon1"
+          >@</span
+        >
+        <input
+          class="form-control"
+          type="text"
+          v-model="userName"
+          placeholder="Username"
+          required
+        />
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 17.5%" id="basic-addon2">*</span>
-        <input class="form-control" type="password" v-model="password" placeholder="Password" required />
+        <span class="input-group-text" style="width: 17.5%" id="basic-addon2"
+          >*</span
+        >
+        <input
+          class="form-control"
+          type="password"
+          v-model="password"
+          placeholder="Password"
+          required
+        />
       </div>
-      <button @click="login" class="btn mb-3" style="background-color: coral; color: white" >Login</button>
+      <button
+        @click="login"
+        class="btn mb-3"
+        style="background-color: coral; color: white"
+      >
+        Login
+      </button>
     </form>
     <div v-if="!isLoggedIn()" class="text-center">
-      <RouterLink to="/registration">Dont have an account? Click here!</RouterLink>
+      <RouterLink to="/registration"
+        >Dont have an account? Click here!</RouterLink
+      >
     </div>
     <div class="text-center">
-      <a v-if="isLoggedIn()" class="mt-2 text-success" href="/pantry" style="text-decoration: none">Already logged in. Click here!</a>
+      <a
+        v-if="isLoggedIn()"
+        class="mt-2 text-success"
+        href="/#/pantry"
+        style="text-decoration: none"
+        >Already logged in. Click here!</a
+      >
       <p v-else class="mt-2 text-danger">Not Logged in</p>
     </div>
   </div>
@@ -25,8 +55,8 @@
 import { SINGLE_USER_ENDPOINT } from "@/constants";
 import useFetch from "@/service/useFetch";
 import { useRouter } from "vue-router";
-import {  userStore } from "@/store";
-import {onMounted, ref} from "vue";
+import { userStore } from "@/store";
+import { onMounted, ref } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 
 const userName = ref("");
@@ -40,8 +70,6 @@ const login = async () => {
     userName: userName.value,
     password: password.value,
   });
-
- 
 
   data.then((res) => {
     if (res) {
@@ -60,7 +88,7 @@ const isLoggedIn = (): boolean => {
     return false;
   }
   return true;
-}
+};
 
 onMounted(isLoggedIn);
 </script>

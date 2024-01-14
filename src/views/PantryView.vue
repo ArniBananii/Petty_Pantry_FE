@@ -12,12 +12,12 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white" href="/addIngredient"
+          <a class="nav-link" style="color: white" href="/#/addIngredient"
             >Add Ingredients</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white" href="/about">About us</a>
+          <a class="nav-link" style="color: white" href="/#/about">About us</a>
         </li>
         <li class="nav-item ms-auto">
           <button @click="deleteUser" class="btn btn-danger">
