@@ -1,8 +1,13 @@
 <template>
-  <div class="container mt-5">
+  <div v-if="uniqueIngredients.length === 0" class="text-center" style="background-color: #181818; padding: 20px; border-radius: 15px; margin: 0 -20px; width: 100%">
+    <h2 style="color: coral">You dont have any ingredients in your Pantry yet!</h2>
+    <h2 style="color: white">Go add some under 'Add Ingredients'</h2>
+  </div>
+  <div v-if="uniqueIngredients.length > 0" class="container">
     <div class="row">
-      <table class="table table-bordered col" style="border: none">
-        <thead class="text-center">
+      <div class="col">
+        <table class="table table-borderless" style="border: none">
+          <thead class="text-center">
           <tr>
             <th style="background-color: coral; color: white" scope="col">
               Ingredient
@@ -18,39 +23,41 @@
         <tbody>
           <tr v-for="ing in uniqueIngredients" :key="ing.uniqueIngredientID">
             <td
-              class="text-center"
-              style="vertical-align: middle; background-color: #181818"
+              class="text-center base-color"
+              style="vertical-align: middle"
+              :class="{ 'week-color' : isExperationThisWeek(ing), 'day-color' : isExperationToday(ing) }"
             >
               <IngredientComponent :ingredientID="ing.ingredientID" />
             </td>
             <td
-              class="text-center"
+              class="text-center base-color"
               style="
                 vertical-align: middle;
-                background-color: #181818;
-                color: white;
-              "
+                color: white"
+              :class="{ 'week-color' : isExperationThisWeek(ing), 'day-color' : isExperationToday(ing) }"
             >
               <span>{{ dateTransform(ing.expirationDate) }}</span>
             </td>
 
             <td
-              class="text-center"
-              style="vertical-align: middle; background-color: #181818"
+              class="text-center base-color"
+              style="vertical-align: middle"
+              :class="{ 'week-color' : isExperationThisWeek(ing), 'day-color' : isExperationToday(ing) }"
             >
               <button
-                v-if="ing"
-                @click="deleteIngredient(ing.uniqueIngredientID)"
-                class="btn"
-                style="background-color: coral; color: white"
+                  v-if="ing"
+                  @click="deleteIngredient(ing.uniqueIngredientID)"
+                  class="btn"
+                  style="background-color: coral; color: white"
               >
                 Delete
               </button>
             </td>
           </tr>
-        </tbody>
-      </table>
-      <div v-if="uniqueIngredients.length > 0" class="api-text col">
+          </tbody>
+        </table>
+      </div>
+      <div class="api-text col">
         <RecipeComponent
           v-if="uniqueIngredients.length > 0"
           :uniqueIngredients="uniqueIngredients"
@@ -72,6 +79,7 @@ import {
 } from "@/constants";
 import { pantryStore } from "@/store";
 import type { UniqueIngredient } from "@/@types";
+import {isExperationThisWeek, isExperationToday} from "@/utils/checkExperation";
 
 const pantry = pantryStore();
 const user = JSON.parse(localStorage.getItem("user") ?? "");
@@ -109,6 +117,18 @@ const dateTransform = (date: Date) => {
 </script>
 
 <style scoped>
+.base-color {
+  background-color: #181818;
+}
+
+.week-color {
+  background-color: darkgoldenrod;
+}
+
+.day-color {
+  background-color: darkred;
+}
+
 .api-text {
   width: 600px;
 }

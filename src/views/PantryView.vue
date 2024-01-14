@@ -17,9 +17,9 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: white">About us</a>
+          <a class="nav-link" style="color: white" href="/about">About us</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ms-auto">
           <button @click="deleteUser" class="btn btn-danger">
             Delete Account
           </button>
@@ -35,7 +35,7 @@
         </li>
       </ul>
     </div>
-    <div class="container pantry-design">
+    <div class="container pantry-view">
       <UserPantry />
     </div>
   </div>

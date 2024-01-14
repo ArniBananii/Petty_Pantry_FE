@@ -1,9 +1,12 @@
 <template>
-  <div class="registration-view">
-    <h1 class="display-4 text-center fw-bold" style="color: white">Registration</h1>
+  <div class="text-center" style="height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div class="registration-view" style="height: 35.3%;width: 100%; border-color: coral">
+      <h1 class="display-4 text-center fw-bold" style="color: white">Registration</h1>
 
-    <RegistrationForm />
+      <RegistrationForm />
+    </div>
   </div>
+
 </template>
 
 <script lang="ts">

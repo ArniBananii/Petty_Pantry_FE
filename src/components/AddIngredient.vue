@@ -1,7 +1,9 @@
 <template>
+  <div class="mb-5 text-center" style="background-color: #181818; padding: 20px; border-radius: 15px; margin: 0 -20px; width: 100%">
+    <h2 style="color: coral">Arsenal of Ingredients</h2>
+    <h2 style="color: white">Add your ingredients to your Pantry!</h2>
+  </div>
   <div class="text-center mt-3">
-    <h2 style="color: white">Arsenal of Ingredients</h2>
-    <h2 style="color: white">Add your Ingredients to your Pantry!</h2>
     <div class="container">
       <div class="row" v-for="ing in ingredients" :key="ing.ingredientID">
         <div class="col ingredient-container">
@@ -10,8 +12,9 @@
             <IngredientComponent :ingredientID="ing.ingredientID" />
             <button
               @click="insertIngredients(ing.ingredientID, pantryID)"
+              :disabled="buttonDisabled"
               class="btn button-overlay"
-              style="background-color: coral; color: white"
+              :class="buttonDisabled ? 'disabled-button' : 'base-button'"
             >
               Add
             </button>
@@ -37,15 +40,21 @@ import type { Ingredient } from "@/@types";
 const ingredients = ref([] as Ingredient[]) as Ref<Ingredient[]>;
 const pantryID = ref(0);
 const user = JSON.parse(localStorage.getItem("user") ?? "");
+const buttonDisabled = ref(false);
 
 const insertIngredients = async (ingredientID: number, pantryID: number) => {
+  if (!buttonDisabled.value) {
+    buttonDisabled.value = true;
+  }
   const postBody = {
     pantryID: pantryID,
     ingredientID: ingredientID,
   };
-
   //const { execute } deconstructing to trigger the fetch when wanted!
   await useFetch(`${POST_UNQING_ENDPOINT}`).post(postBody);
+  setTimeout(() => {
+    buttonDisabled.value = false;
+  }, 250)
 };
 
 onMounted(async () => {
@@ -68,6 +77,18 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.base-button {
+  background-color: coral;
+  color: white;
+}
+
+.disabled-button {
+  background-color: #282828;
+  color: #cccccc;
+  cursor: not-allowed;
+  border: none;
+}
+
 .ingredient-container {
   position: relative;
   overflow: hidden;
