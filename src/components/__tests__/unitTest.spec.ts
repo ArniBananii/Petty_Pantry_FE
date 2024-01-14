@@ -21,6 +21,7 @@ test("does isExperationToday find an ingredient that expired", () => {
 
 test("are all ingredients in our db fetched", async () => {
   console.log("INGREDIENTS_ENDPOINT", INGREDIENTS_ENDPOINT);
+
   const { data } = await useFetch<Ingredient[]>(INGREDIENTS_ENDPOINT)
     .get()
     .json();
@@ -30,7 +31,7 @@ test("are all ingredients in our db fetched", async () => {
   };
 
   const test = unwrap(data);
-
+  console.log("test data= ", test);
   const fileContent = JSON.parse(JSON.stringify(db));
 
   expect(test).toMatchObject(fileContent);
