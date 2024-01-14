@@ -22,7 +22,9 @@ test("does isExperationToday find an ingredient that expired", () => {
 test("are all ingredients in our db fetched", async () => {
   console.log("INGREDIENTS_ENDPOINT", INGREDIENTS_ENDPOINT);
 
-  const { data } = await useFetch<Ingredient[]>(INGREDIENTS_ENDPOINT)
+  const { data } = await useFetch<Ingredient[]>(
+    "https://pettypantry-be.onrender.com/api/v1/ingredients"
+  )
     .get()
     .json();
 

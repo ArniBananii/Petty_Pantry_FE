@@ -7,9 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
-      VITE_ENDPOINT_INGREDIENTS: ${{ secrets.VITE_ENDPOINT_INGREDIENTS }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up node 20.10.0
