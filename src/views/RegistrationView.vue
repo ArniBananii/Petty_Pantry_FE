@@ -1,5 +1,6 @@
 <template>
-  <div class="text-center" style="height: 100vh; display: flex; justify-content: center; align-items: center">
+  <div class="text-center" style="height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column">
+    <img src="https://pettypantry.s3.eu-central-1.amazonaws.com/logo/logo.png" alt="Loading">
     <div class="registration-view" style="height: 35.3%;width: 100%; border-color: coral">
       <h1 class="display-4 text-center fw-bold" style="color: white">Registration</h1>
 
