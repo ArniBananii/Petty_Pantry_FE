@@ -1,12 +1,18 @@
 <template>
   <div>
-    <input type="text" v-model="userName" placeholder="Username" required />
-    <input type="password" v-model="password" placeholder="Password" required />
-    <button @click="register">Go!</button>
-    <div>{{ userName }}</div>
-    <RouterLink to="/login">U have an ACCOUNT?! click here!</RouterLink>
-    <div>
-      {{ user.isLoggedIn ? "Logged in" : "Not logged in" }}
+    <form>
+      <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 17.5%" id="basic-addon1">@</span>
+        <input class="form-control" type="text" v-model="userName" placeholder="Username" required />
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 17.5%" id="basic-addon1">*</span>
+        <input class="form-control" type="password" v-model="password" placeholder="Password" required />
+      </div>
+      <button class="btn mb-3" style="background-color: coral; color: white" @click="register">Go!</button>
+    </form>
+    <div class="text-center">
+      <RouterLink to="/login">Back to Login</RouterLink>
     </div>
   </div>
 </template>
@@ -40,5 +46,7 @@ const register = async () => {
       console.log("User not found");
     }
   });
+
+  await router.push("/login");
 };
 </script>
